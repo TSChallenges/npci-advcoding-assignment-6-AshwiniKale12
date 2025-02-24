@@ -1,6 +1,9 @@
 package com.mystore.app;
 
-class Barcode {
+import org.springframework.stereotype.Component;
+
+@Component
+public class Barcode {
 
     public Barcode() {
         System.out.println("In Barcode constructor");
@@ -10,18 +13,11 @@ class Barcode {
         String bcode = "|";
         int hashcode = p.getId() + p.getName().hashCode();
 
-        String numberStr = String.valueOf(hashcode);  // Convert number to a string
+        String numberStr = String.valueOf(hashcode);
 
-        // Loop through each character in the string
         for (char digitChar : numberStr.toCharArray()) {
-            int digit = Character.getNumericValue(digitChar);  // Convert char to int
-            
-            // Check if the digit is even or odd
-            if (digit % 2 == 0) {
-                bcode = bcode + "❚";
-            } else {
-                bcode = bcode + "|";
-            }
+            int digit = Character.getNumericValue(digitChar);
+            bcode += (digit % 2 == 0) ? "❚" : "|";
         }
 
         return bcode + "|";
